@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LottoService } from '../lotto.service';
+import { Lotto } from '../lotto';
+
 
 @Component({
   selector: 'app-lotto',
@@ -6,25 +10,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lotto.component.css']
 })
 export class LottoComponent implements OnInit {
-  title = "Loto";
-  disable = true;
-  isRed=true;
-  constructor() { }
+  title = "Lotto";
+  formGroup: FormGroup;
+
+  result: Lotto[] = [];
 
 
-  message = 'my message';
-  money = 1000000.120;
-  toDay = new Date();
-  names = ['Kae','Som-1','nop'];
-  
+  constructor(private formBuilder: FormBuilder, private lottoService: LottoService) { }
+
   ngOnInit() {
+    this.formGroup = this.formBuilder.group({
+      period: ['', Validators.required],
+      lottoNumber: ['', Validators.required],
+    });
+
+    this.result=this.lottoService.getAll();
+
   }
 
-  getName() : string {
-    return "Angular";
+  checkLotto() {
+    if (this.formGroup.invalid) {
+      alert("Error !!!")
+    }
+  }
 
-  }
-  showRed(): boolean {
-    return true;
-  }
 }
+

@@ -1,46 +1,34 @@
-<p>
-  {{getName()}}
-  {{2+2}}
-</p>
+<div class="container">
+  <form [formGroup]="formGroup">
+    <div class="form-group">
 
+      <label class="control-label">งวดวันที่</label>
+      <select class="form-control" formControlName="period">
+        <option value="20190201">01 กุมภาพันธ์ 2562</option>
+        <option value="20190201">16 กุมภาพันธ์ 2562</option>
 
-<button [disabled]="disable"  >  Disable</button>
+      </select>
 
+    </div>
+    <div class="form-group">
+      <label class="control-label">เลขล็อตเตอร์รี่</label>
+      <input class="form-control" formControlName="lottoNumber">
 
+    </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <button class="btn btn-primary btn-block" (click)="checkLotto()">ตรวจ</button>
 
+      </div>
+      <div class="col-sm-6 form-group">
+        <button class="btn btn-secondary btn-block">ล้าง</button>
+      </div>
+    </div>
+  </form>
+  <div>
+    <ul *ngFor="let r of result">
+      <li>รางวันที่1{{r.bigPrize}}รางวัลเลขท้ายสามตัว:{{r.lastThreeDigitPrize}}</li>
 
-
-<table border="1">
-  <tr>
-    <td [attr.colspan]="2">
-      Two
-    </td>
-  </tr>
-<tr>
-  <td>one</td>
-  <td>two</td>
-</tr>
-</table>
-
-<div *ngIf= "showRed()">
-<div [ngClass]="{'red':isRed }">RED</div>
-  
+    </ul>
+  </div>
 </div>
-
-
-<div (keyup)="0">
-  keyint
-  <input  #myInput>{{myInput.value}}
-</div>
-
-<div>
-  <input [ngModel]="message">{{message}}
-</div>
-
-<ul *ngFor="let n of names">
-  <li>{{n}}</li>
-</ul>
-
-{{money | number:'1.3-3'}}
-<br>
-{{toDay| date:'dd-MM-yyy'}}
